@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Ticket Mesa 1</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            width: 280px;
+            margin: 0 auto;
+            padding: 10px;
+            color: #000000;
+        }
+        .center { text-align: center; }
+        .bold { font-weight: bold; }
+        hr { border: none; border-top: 1px dashed #000; margin: 8px 0; }
+        table { width: 100%; border-collapse: collapse; }
+        td, th { font-size: 13px; }
+        .total { font-size: 16px; font-weight: bold; margin-top: 5px; }
+        @media print {
+            @page { margin: 0; }
+            body { width: 100%; padding: 5px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="center bold" style="font-size: 18px;">BAR CONTROL PRO</div>
+    <div class="center" style="font-size: 12px;">Ticket de Consumo</div>
+    <hr>
+    <div style="font-size: 12px;"><b>Ticket N°:</b> 2</div>
+    <div style="font-size: 12px;"><b>Fecha:</b> 10/08/2026 18:49:36</div>
+    <div style="font-size: 12px;"><b>Mesa:</b> N° 1</div>
+    <div style="font-size: 12px;"><b>Pago:</b> 💳 Tarjeta</div>
+    <hr>
+    <table>
+        <thead>
+            <tr>
+                <th style="text-align: left;">CANT / PROD</th>
+                <th style="text-align: right;">SUBTOTAL</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        <tr>
+            <td style="text-align: left; padding: 3px 0;">3x Cafe con leche</td>
+            <td style="text-align: right; padding: 3px 0;">$16500.00</td>
+        </tr>
+        
+        </tbody>
+    </table>
+    <hr>
+    <div class="total" style="display: flex; justify-content: space-between;">
+        <span>TOTAL:</span>
+        <span>$16500.00</span>
+    </div>
+    <hr>
+    <div class="center" style="font-size: 11px; margin-top: 8px;">
+        ¡Gracias por su visita!<br>
+        www.barcontrol.com
+    </div>
+
+    <script>
+        window.onload = function() {
+            window.print();
+        };
+    </script>
+</body>
+</html>
