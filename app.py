@@ -4,6 +4,18 @@ import webbrowser
 import customtkinter as ctk
 from PIL import Image, ImageTk
 from database import inicializar_bd, Mesa, Producto, PedidoMesa, Venta, Categoria, CierreCaja, Usuario, hash_password
+import sys
+import ctypes
+from PIL import Image, ImageTk
+
+# 1. FORZAR ÍCONO EN LA BARRA DE TAREAS DE WINDOWS
+# (Debe ir ANTES de crear cualquier ventana o llamar a ctk.CTk())
+if sys.platform.startswith("win"):
+    try:
+        app_id = "universum.barcontrolpro.sistema.1.0"
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(app_id)
+    except Exception:
+        pass
 
 # ==========================================
 # CONFIGURACIÓN DE TEMA Y ESTILOS GLOBALES
@@ -405,12 +417,18 @@ class BarSystemApp(ctk.CTk):
         self.minsize(1050, 650)
         self.configure(fg_color=COLORES["fondo_oscuro"])
 
+        # --- CONFIGURACIÓN DEL ÍCONO (VENTANA SUPERIOR Y BARRA) ---
         try:
-            img_icono_pil = Image.open("assets/universum.jpg")
-            self.photo_icono = ImageTk.PhotoImage(img_icono_pil)
-            self.iconphoto(False, self.photo_icono)
-        except Exception as e:
-            print(f"No se pudo establecer el icono superior: {e}")
+            # 1. Intentamos cargar icono en formato .ico si existe
+            self.iconbitmap("assets/universum.ico")
+        except Exception:
+            try:
+                # 2. Si es .jpg o .png, lo cargamos con PIL e iconphoto
+                img_icono_pil = Image.open("assets/universum.jpg")
+                self.photo_icono = ImageTk.PhotoImage(img_icono_pil)
+                self.iconphoto(False, self.photo_icono)
+            except Exception as e:
+                print(f"No se pudo establecer el icono superior: {e}")
 
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(1, weight=1)

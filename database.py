@@ -73,7 +73,7 @@ def inicializar_bd():
     if Usuario.select().count() == 0:
         Usuario.create(
             username="admin",
-            password_hash=hash_password("admin789"),
+            password_hash=hash_password("admin123"),
             rol="Admin"
         )
         print("-> Usuario Administrador por defecto creado (admin / admin123)")
