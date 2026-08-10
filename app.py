@@ -407,6 +407,7 @@ class DetalleMesaWindow(ctk.CTkToplevel):
 
 
 class BarSystemApp(ctk.CTk):
+    
     def __init__(self, usuario_actual):
         super().__init__()
 
@@ -416,8 +417,25 @@ class BarSystemApp(ctk.CTk):
         centrar_ventana(self, 1250, 720)
         self.minsize(1050, 650)
         self.configure(fg_color=COLORES["fondo_oscuro"])
+        
 
         # --- CONFIGURACIÓN DEL ÍCONO (VENTANA SUPERIOR Y BARRA) ---
+        try:
+            # 1. Intentamos cargar icono en formato .ico si existe
+            self.iconbitmap("assets/universum.ico")
+        except Exception:
+            try:
+                # 2. Si es .jpg o .png, lo cargamos con PIL e iconphoto
+                img_icono_pil = Image.open("assets/universum.jpg")
+                self.photo_icono = ImageTk.PhotoImage(img_icono_pil)
+                self.iconphoto(False, self.photo_icono)
+            except Exception as e:
+                print(f"No se pudo establecer el icono superior: {e}")
+
+        self.grid_rowconfigure(0, weight=1)
+        self.grid_columnconfigure(1, weight=1)
+
+       # --- CONFIGURACIÓN DEL ÍCONO (VENTANA SUPERIOR Y BARRA) ---
         try:
             # 1. Intentamos cargar icono en formato .ico si existe
             self.iconbitmap("assets/universum.ico")
@@ -453,7 +471,9 @@ class BarSystemApp(ctk.CTk):
         self.btn_nav_menu = self.crear_boton_nav("🍔 Menú y Categorías", self.mostrar_gestion_productos, 3)
         self.btn_nav_comandas = self.crear_boton_nav("📝 Comandas Activas", self.mostrar_pedidos, 4)
         self.btn_nav_reportes = self.crear_boton_nav("📊 Cierre de Caja", self.mostrar_inventario, 5)
+        
 
+        # --- LOGO UNIVERSUM ---
         try:
             imagen_pil = Image.open("assets/universum.jpg")
             self.logo_sidebar_img = ctk.CTkImage(
@@ -462,16 +482,18 @@ class BarSystemApp(ctk.CTk):
                 size=(120, 120)
             )
             self.lbl_logo_sidebar = ctk.CTkLabel(self.sidebar_frame, image=self.logo_sidebar_img, text="")
-            self.lbl_logo_sidebar.grid(row=6, column=0, pady=(15, 5))
+            self.lbl_logo_sidebar.grid(row=6, column=0, pady=(15, 2))
         except Exception as e:
             print(f"No se pudo cargar el logo lateral: {e}")
 
+
+        # --- BOTÓN CERRAR SESIÓN ---
         btn_logout = ctk.CTkButton(
             self.sidebar_frame, text="🚪 Cerrar Sesión", font=FONT_ESTANDAR,
             height=32, corner_radius=10, fg_color="#333333", hover_color=COLORES["eliminar_hover"],
             command=self.cerrar_sesion
         )
-        btn_logout.grid(row=7, column=0, padx=20, pady=(5, 15), sticky="ew")
+        btn_logout.grid(row=8, column=0, padx=20, pady=(5, 15), sticky="ew")
 
         # --- ÁREA PRINCIPAL ---
         self.main_frame = ctk.CTkFrame(self, corner_radius=18, fg_color=COLORES["fondo_panel"])
