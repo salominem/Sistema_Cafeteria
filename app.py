@@ -472,6 +472,7 @@ class BarSystemApp(ctk.CTk):
         self.btn_nav_comandas = self.crear_boton_nav("📝 Comandas Activas", self.mostrar_pedidos, 4)
         self.btn_nav_reportes = self.crear_boton_nav("📊 Cierre de Caja", self.mostrar_inventario, 5)
         
+        
 
         # --- LOGO UNIVERSUM ---
         try:
@@ -485,6 +486,8 @@ class BarSystemApp(ctk.CTk):
             self.lbl_logo_sidebar.grid(row=6, column=0, pady=(15, 2))
         except Exception as e:
             print(f"No se pudo cargar el logo lateral: {e}")
+
+
 
 
         # --- BOTÓN CERRAR SESIÓN ---
@@ -540,7 +543,7 @@ class BarSystemApp(ctk.CTk):
         header.pack(fill="x", padx=30, pady=(25, 15))
         
         ctk.CTkLabel(
-            header, text="Mapa de Mesas Activas", 
+            header, text="Mapa de Mesas", 
             font=FONT_TITULO, text_color=COLORES["texto_principal"]
         ).pack(side="left")
 

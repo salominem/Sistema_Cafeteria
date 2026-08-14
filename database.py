@@ -86,3 +86,5 @@ def inicializar_bd():
     if Mesa.select().count() == 0:
         for i in range(1, 9):
             Mesa.create(numero=i, estado="Libre")
+            
+           
